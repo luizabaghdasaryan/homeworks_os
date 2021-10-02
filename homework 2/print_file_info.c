@@ -1,3 +1,5 @@
+/*3. Написать программу на Си, которая печатает информацию о  времени создания, имени и размера файлов в заданной диреткории.*/
+
 #include <stdio.h>
 
 #include <string.h>
@@ -141,9 +143,6 @@ void traverseRecursive(const char* dirname) {
 	}
 
 			
-
-
-
 		closedir(dir);
 
 }
