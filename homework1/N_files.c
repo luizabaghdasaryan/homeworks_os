@@ -18,7 +18,7 @@ int main() {
             creat(name, S_IRWXU);
             char mes[20] = {'\0'};
             sprintf(mes, "%s%d%s","\"Hello world ", i, "\"");
-	        int length = sizeof(mes) / sizeof(mes[0]);
+	    int length = sizeof(mes) / sizeof(mes[0]);
             int fd = open(name, O_RDWR);
             write(fd, mes, length);
 	    close(fd);
