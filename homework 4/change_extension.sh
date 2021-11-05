@@ -1,3 +1,4 @@
+#1. Замена существующего расширения в имени файла на заданное. Исходное имя файла и новое расширение передаются скрипту в качестве параметров
 #!/bin/bash
 filename=$1
 ext=$2
@@ -15,6 +16,5 @@ else
 	#filename_="${filename%%.*}"
 	#echo "renamed filename: $filename_.$ext"
 	filename_=`echo "$filename" | sed -e 's/\..*//' -e 's/$/'.$ext'/'`
-
 	mv $filename $filename_
 fi
