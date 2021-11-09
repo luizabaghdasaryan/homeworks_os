@@ -34,38 +34,68 @@ void traverseRecursive(const char* dirname) {
 	}
 
 		else
-		{
-			FILE* fptr;
-			printf("\n");
-			printf("%s\n", entry->d_name);
-		 	if(sub_dir==0)
-			{
-				char d_path[256] = { '\0' };
-				strcpy(d_path, dirname);
-				strcat(d_path, "/");
-				strcat(d_path, entry->d_name);
-				fptr = fopen(d_path, "r");
-			}
-			else
-			{
-				char p_path[256] = { '\0' };
-				strcpy(p_path, path);
-				strcat(p_path, "/");
-				strcat(p_path, entry->d_name);
-				fptr = fopen(p_path, "r");
-			}
-		
-			if (fptr == NULL)
-			{
-				return;
-			}
-			char c;
-			while ((c = fgetc(fptr)) != EOF) {
 
-				printf("%c", c);
+		{
+
+			char d[300]={'\0'};//content of directory file
+
+			strcpy(d, dirname);
+
+			strcat(d, "/");
+
+		        char sb[300] = {'\0'};//content of subdirectory path
+
+			strcat(sb, path);
+
+		        strcat(sb, "/");
+
+			if(sub_dir == 0)
+
+			{
+				printf("%s \n", entry->d_name);
+
+				strcpy(d, entry->d_name);
+
+				int f1 = open(d, O_RDONLY);
+
+				char d_f[300] = {'\0'};
+
+				read(f1, d_f, 300);
+
+				for(int i = 0; i < sizeof(d_f); ++i)
+
+				{
+
+					printf("%c", d_f[i]);
+
+				}
+
+			        printf("\n");	
 			}
-			fclose(fptr);
-			printf("\n");
+
+			else
+
+			{
+
+				printf("%s \n", entry->d_name);
+
+				strcat(sb, entry->d_name);
+
+				char sb_f[300] = {'\0'};
+
+				int f2 = open(sb, O_RDONLY);
+
+			        read(f2, sb_f, 300);
+
+				for(int j = 0; j < sizeof(sb_f); ++j)
+
+				{
+					printf("%c", sb_f[j]);
+
+				}
+
+			}
+
 		}
 	}
 
@@ -74,6 +104,6 @@ void traverseRecursive(const char* dirname) {
 
 
 int main() {
-    traverseRecursive("lesson");
+    traverseRecursive(".");
 }
 
