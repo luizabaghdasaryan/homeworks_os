@@ -8,102 +8,91 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-
 void traverseRecursive(const char* dirname) {
-	DIR* dir = opendir(dirname);
 
+	DIR* dir = opendir(dirname);
 	if (!dir) {
+
 		return;
 	}
+
 	printf("%s \\\n", dirname);
 
-	struct dirent* entry;
+        struct dirent* entry;
+
 	char path[256] = { '\0' };
-    int sub_dir=0;//if =1, there are files of subdirectory
+
+	strcpy(path, dirname);
+
+	strcat(path, "/");
+
 	while ((entry = readdir(dir))) {
+
 		if (entry->d_type == DT_DIR) {
+
 			if (strcmp(entry->d_name, ".") && strcmp(entry->d_name, "..")) {
-				++sub_dir;
-				printf("%s \\\n", entry->d_name);
-				strcpy(path, dirname);
-				strcat(path, "/");
-				strcat(path, entry->d_name);
-				traverseRecursive(path);
-				--sub_dir;
+
+					strcat(path, entry->d_name);
+
+					traverseRecursive(path);
+
+					strcpy(path, dirname);
+
+					strcat(path, "/");
 			}
+
 	}
 
 		else
-
 		{
 
-			char d[300]={'\0'};//content of directory file
+			printf("%s \n", entry->d_name);
 
-			strcpy(d, dirname);
+			char d[300]={'\0'};//path of the current file
 
-			strcat(d, "/");
+			strcpy(d, path);
 
-		        char sb[300] = {'\0'};//content of subdirectory path
+		        strcat(d, "/");
 
-			strcat(sb, path);
+			strcat(d, entry->d_name);
 
-		        strcat(sb, "/");
+			struct stat info;
 
-			if(sub_dir == 0)
+			stat(d, &info);
 
-			{
-				printf("%s \n", entry->d_name);
+			long int size = info.st_size;
 
-				strcpy(d, entry->d_name);
+			int fd = open(d, O_RDONLY);
 
-				int f1 = open(d, O_RDONLY);
+			char f[size];//buff for file's content
 
-				char d_f[300] = {'\0'};
+			read(fd, f, size);
 
-				read(f1, d_f, 300);
-
-				for(int i = 0; i < sizeof(d_f); ++i)
-
-				{
-
-					printf("%c", d_f[i]);
-
-				}
-
-			        printf("\n");	
-			}
-
-			else
+			for(long int i = 0; i < size; ++i)
 
 			{
 
-				printf("%s \n", entry->d_name);
-
-				strcat(sb, entry->d_name);
-
-				char sb_f[300] = {'\0'};
-
-				int f2 = open(sb, O_RDONLY);
-
-			        read(f2, sb_f, 300);
-
-				for(int j = 0; j < sizeof(sb_f); ++j)
-
-				{
-					printf("%c", sb_f[j]);
-
-				}
+				printf("%c", f[i]);
 
 			}
+
+			printf("\n");
+
+			close(fd);
 
 		}
+
 	}
 
 		closedir(dir);
+
 }
 
-
 int main() {
+
     traverseRecursive(".");
+
+    return 0;
+
 }
 
