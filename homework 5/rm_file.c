@@ -1,3 +1,4 @@
+#2. Написать программу, которая получает на вход имя файла и удаляет данный файл, если такой файл существует. Использовать Makefile для сборки программы.
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -16,4 +17,3 @@ int main(int argc, char* argv[])
 {
 	RM_FILE(argv[1]);
 }
-
