@@ -46,7 +46,7 @@ void Count(const char* filename, const char* substring) {
 
 	if (counter == 0)
 	{
-		printf("The given substring was not found \n");
+		printf("The given substring was not found - wrong input!\n");
 	}
 	else
 	{
@@ -56,7 +56,7 @@ void Count(const char* filename, const char* substring) {
 }
 
 int main(int argc, char* argv[]) {
-    Count(argv[1], argv[2]);
+	Count(argv[1], argv[2]);
 	return 0;
 }
 
