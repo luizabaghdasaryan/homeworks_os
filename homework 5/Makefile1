@@ -1,7 +1,13 @@
-№2. Написать программу, которая получает на вчод имя файла и удаляет данный файл, если такой файл существует. Использовать Makefile для сборки программы.
-VAR=$(VAR_CMDLINE)
-all: remove_file
-	./remove_file $(VAR)
+V1=$(f_name)
+V2=$(sub_str)
+C=gcc
+all: substr
+	./substr $(V1) $(V2)
 
-remove_file: rm_file.c
-	gcc rm_file.c -o remove_file
+substr: count_substr.o
+	$(CC) count_substr.o -o substr
+
+count_substr.o: count_substr.c
+	$(CC) -c count_substr.c
+#.PHONY clean:
+#	rm count_substr.o
