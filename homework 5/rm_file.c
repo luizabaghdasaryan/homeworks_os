@@ -16,4 +16,5 @@ void RM_FILE(const char* filename)
 int main(int argc, char* argv[])
 {
 	RM_FILE(argv[1]);
+	return 0;
 }
