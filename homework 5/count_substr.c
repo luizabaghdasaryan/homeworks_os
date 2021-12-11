@@ -26,7 +26,7 @@ void Count(const char* filename, const char* substring) {
 	int s_size = strlen(substring);
 	if (s_size > size)
 	{
-		printf("Size of substring > file's size \n");
+		printf("Size of substring > file's size - wrong input!\n");
 	}
 	int counter = 0;
 	char buff2[size];
@@ -46,11 +46,11 @@ void Count(const char* filename, const char* substring) {
 
 	if (counter == 0)
 	{
-		printf("The given substring was not found - wrong input!\n");
+		printf("The given substring was not found \n");
 	}
 	else
 	{
-		printf("%s %d %s", "the given substring occurred", counter, "times");
+		printf("%s %d %s", "the given substring occurred", counter, "times \n");
 	}
 	close(fd);
 }
