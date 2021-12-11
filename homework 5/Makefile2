@@ -1,0 +1,15 @@
+#1. Написать программу, которая получает на вход имя файла и текстовую константу.
+#Программа должна вывести на экран количество вхождений текстовой константы в файле. Использовать Makefile для сборки программы.
+V1=$(f_name)
+V2=$(sub_str)
+C=gcc
+all: substr
+	./substr $(V1) $(V2)
+
+substr: count_substr.o
+	$(CC) count_substr.o -o substr
+
+count_substr.o: count_substr.c
+	$(CC) -c count_substr.c
+#.PHONY clean:
+#	rm count_substr.o
