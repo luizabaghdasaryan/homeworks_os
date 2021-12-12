@@ -21,7 +21,6 @@ void Count(const char* filename, const char* substring) {
 		return;
 	}
 	long int size = info.st_size;
-	int n = size;
         char buff[size];
 	read(fd, buff, size);
 	int s_size = strlen(substring);
