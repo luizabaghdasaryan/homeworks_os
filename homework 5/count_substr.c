@@ -10,7 +10,6 @@
 #include <sys/stat.h>
 
 void Count(const char* filename, const char* substring) {
-	char path[256] = { '\0' };
 	int fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
