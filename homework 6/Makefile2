@@ -1,0 +1,11 @@
+CC=gcc
+
+all: fork
+
+fork1: fork.o
+	$(CC) fork.o -o fork
+
+fork.o: fork.c
+	$(CC) -c fork.c
+
+clean: rm fork.o
