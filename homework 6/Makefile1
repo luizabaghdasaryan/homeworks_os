@@ -1,0 +1,9 @@
+CC=gcc
+
+all: cat
+
+cat: execv_cat.c
+	$(CC) execv_cat.c -o cat
+
+clean:
+	rm execv_cat.o
